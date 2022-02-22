@@ -1,0 +1,17 @@
+MTG Project
+
+Expectations
+-searchbar
+SB/search by
+SB/ sort by
+
+Nice to have
+Similar cards by tag
+temperary que
+
+Tools
+Scryfall API
+
+Essential
+Search for functions 
+by card name
