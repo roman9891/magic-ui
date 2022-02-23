@@ -20,8 +20,10 @@ const createAutoComplete = ({
   const resultsWrapper = root.querySelector(".results");
 
   const onInput = async (e) => {
-    const items = await fetchData(e.target.value);
     removeAllChildNodes(resultsWrapper);
+    
+    const items = await fetchData(e.target.value);
+    
     if (!items.length) {
       dropdown.classList.remove("is-active");
       return;

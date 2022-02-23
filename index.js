@@ -15,7 +15,7 @@ const cardTemplate = (card) => {
       <article class="media">
         <div class="media-left">
           <figure class="image is-488x680">
-            <img src="${card.image_uris.small}" alt="Image">
+            <img src="${card.image_uris?.small || CARDBACKIMG}" alt="Image">
           </figure>
         </div>
         <div class="media-content">
@@ -86,20 +86,28 @@ const autoCompleteConfig = {
   },
   onEnter: (cardList, onOptionSelect) => {
     const resultsDiv = document.querySelector("#results");
+
     removeAllChildNodes(resultsDiv);
-    for (let i = 0; i < 3; i++) {
+
+    for (let i = 0; i < 4; i++) {
       const column = document.createElement("div");
       column.classList.add("column");
       resultsDiv.appendChild(column);
     }
-    console.log(resultsDiv);
-    cardList.forEach((card) => {
+
+    cardList.forEach((card, i) => {
+      let x = i % resultsDiv.children.length
+
+      const div = document.createElement("div")
       const img = document.createElement("img");
-      img.src = card.image_uris?.small;
+
+      img.src = card.image_uris?.normal || CARDBACKIMG
       img.addEventListener("click", () => {
         onOptionSelect(card);
       });
-      resultsDiv.appendChild(img);
+
+      div.appendChild(img)
+      resultsDiv.children[x].appendChild(div);
     });
   },
 };
