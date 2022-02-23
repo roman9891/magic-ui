@@ -21,7 +21,6 @@ const createAutoComplete = ({
   const onInput = async (e) => {
     const items = await fetchData(e.target.value);
     removeAllChildNodes(resultsWrapper);
-    // console.log(items);
     if (!items.length) {
       dropdown.classList.remove("is-active");
       return;
