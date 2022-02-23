@@ -2,12 +2,25 @@ MTG Project
 
 Expectations
 -searchbar
+Autocomplete implementation
+-return bumla 
+
 SB/search by
+
+Key Words
+-autocomplete Keywords.
+->onInput get keyword 
+->return in dropdown same letters
+->update input onClick or 'keystroke', 'enter'
+->save selection as serch by tag (css and innerHTML)
+->prepare to accept another search or search for cards to return
+
 SB/ sort by
 
 Nice to have
 Similar cards by tag
-temperary que
+-tags => "oracle text" parsed and counted
+
 
 Tools
 Scryfall API
@@ -15,3 +28,7 @@ Scryfall API
 Essential
 Search for functions 
 by card name
+
+PostUI Improvements
+
+Temporary que
