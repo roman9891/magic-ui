@@ -2,12 +2,13 @@ const BASEURL = "https://api.scryfall.com";
 const SEARCHEND = "/cards/search";
 const AUTOCOMPLETE = "/cards/autocomplete";
 const CARDS = "/cards/";
-const CARDBACKIMG = 'https://static.wikia.nocookie.net/mtgsalvation_gamepedia/images/f/f8/Magic_card_back.jpg/revision/latest?cb=20140813141013'
+const CARDBACKIMG =
+  "https://static.wikia.nocookie.net/mtgsalvation_gamepedia/images/f/f8/Magic_card_back.jpg/revision/latest?cb=20140813141013";
 const root = document.querySelector(".autocomplete");
 const onCardSelect = async (card, summaryElement) => {
   const response = await axios.get(BASEURL + CARDS + card.id);
   summaryElement.innerHTML = cardTemplate(response.data);
-}
+};
 const cardTemplate = (card) => {
   return `
     <div class="box">
@@ -53,7 +54,7 @@ const cardTemplate = (card) => {
         </div>
       </article>
     </div>
-  `
+  `;
 };
 const autoCompleteConfig = {
   root,
@@ -84,17 +85,23 @@ const autoCompleteConfig = {
     onCardSelect(card, document.querySelector("#results"));
   },
   onEnter: (cardList, onOptionSelect) => {
-    const resultsDiv = document.querySelector('#results')
-    
-    removeAllChildNodes(resultsDiv)
-    
-    cardList.forEach(card => {
-      const img = document.createElement('img')
-      img.src = card.image_uris?.small
-      img.addEventListener('click', () => {onOptionSelect(card)})
-      resultsDiv.appendChild(img)
-    })
-  }
+    const resultsDiv = document.querySelector("#results");
+    removeAllChildNodes(resultsDiv);
+    for (let i = 0; i < 3; i++) {
+      const column = document.createElement("div");
+      column.classList.add("column");
+      resultsDiv.appendChild(column);
+    }
+    console.log(resultsDiv);
+    cardList.forEach((card) => {
+      const img = document.createElement("img");
+      img.src = card.image_uris?.small;
+      img.addEventListener("click", () => {
+        onOptionSelect(card);
+      });
+      resultsDiv.appendChild(img);
+    });
+  },
 };
 
 createAutoComplete(autoCompleteConfig);
