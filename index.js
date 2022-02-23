@@ -2,6 +2,7 @@ const BASEURL = "https://api.scryfall.com";
 const SEARCHEND = "/cards/search";
 const AUTOCOMPLETE = "/cards/autocomplete";
 const CARDS = "/cards/";
+const CARDBACKIMG = 'https://static.wikia.nocookie.net/mtgsalvation_gamepedia/images/f/f8/Magic_card_back.jpg/revision/latest?cb=20140813141013'
 const root = document.querySelector(".autocomplete");
 const onCardSelect = async (card, summaryElement) => {
   const response = await axios.get(BASEURL + CARDS + card.id);
@@ -57,9 +58,9 @@ const cardTemplate = (card) => {
 const autoCompleteConfig = {
   root,
   renderOption: (card) => {
-    const poster = card.image_uris.small;
+    const poster = card.image_uris?.small || CARDBACKIMG;
     return `
-          <img src="${poster}"/>
+          <img src="${poster}" class="image is-146x204"/>
           <p>${card.name} (${card.set_name})</p>
       `;
   },
@@ -80,8 +81,20 @@ const autoCompleteConfig = {
     return response.data.data;
   },
   onOptionSelect: (card) => {
-    onCardSelect(card, document.querySelector("#selected"));
+    onCardSelect(card, document.querySelector("#results"));
   },
+  onEnter: (cardList, onOptionSelect) => {
+    const resultsDiv = document.querySelector('#results')
+    
+    removeAllChildNodes(resultsDiv)
+    
+    cardList.forEach(card => {
+      const img = document.createElement('img')
+      img.src = card.image_uris?.small
+      img.addEventListener('click', () => {onOptionSelect(card)})
+      resultsDiv.appendChild(img)
+    })
+  }
 };
 
 createAutoComplete(autoCompleteConfig);

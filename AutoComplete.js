@@ -4,6 +4,7 @@ const createAutoComplete = ({
   onOptionSelect,
   inputValue,
   fetchData,
+  onEnter,
 }) => {
   root.innerHTML = `
         <label><b>Search</b></label>
@@ -44,14 +45,15 @@ const createAutoComplete = ({
   };
 
   input.addEventListener("input", debounce(onInput, 500));
+  if (onEnter) input.addEventListener("keydown", async (e) => {
+    if (e.key === 'Enter') {
+      dropdown.classList.remove("is-active")
+      const items = await fetchData(e.target.value)
+      onEnter(items, onOptionSelect)
+    }
+  })
 
   document.addEventListener("click", (e) => {
     if (!root.contains(e.target)) dropdown.classList.remove("is-active");
   });
-};
-
-const removeAllChildNodes = (parent) => {
-  while (parent.firstChild) {
-    parent.removeChild(parent.firstChild);
-  }
 };
