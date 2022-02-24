@@ -102,6 +102,7 @@ const autoCompleteConfig = {
       let x = i % resultsDiv.children.length
 
       const div = document.createElement("div")
+      div.classList.add('block')
       const img = document.createElement("img");
 
       img.src = card.image_uris?.normal || CARDBACKIMG
@@ -135,7 +136,9 @@ const queryAssemble = formData => {
         break
       }
       case 'Text': {
-        searchTerm += ` o:${formData[key]}`
+        const words = formData[key].split(' ')
+        words.forEach(word => searchTerm += ` o:${word}`)
+        // searchTerm += ` o:${formData[key]}`
         console.log(key)
         break
       }

@@ -21,7 +21,7 @@ const createAutoComplete = ({
 
   const onInput = async (e) => {
     removeAllChildNodes(resultsWrapper);
-    
+
     const items = await fetchData(e.target.value);
     
     if (!items.length) {
@@ -46,7 +46,7 @@ const createAutoComplete = ({
     }
   };
 
-  input.addEventListener("input", debounce(onInput, 500));
+  // input.addEventListener("input", debounce(onInput, 500));
   if (onEnter) input.addEventListener("keydown", async (e) => {
     if (e.key === 'Enter') {
       dropdown.classList.remove("is-active")
