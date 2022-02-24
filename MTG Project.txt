@@ -32,3 +32,37 @@ by card name
 PostUI Improvements
 
 Temporary que
+
+TODO
+-------
+Routing
+- id view
+- ist view
+- serialize params into url
+- pagination
+
+tagging feature
+- buttonize card info
+- onClick updates search params
+
+Styling
+- logo
+- get results to take up more space
+- search button alignment
+
+Backpack (temp list)
+- optional select to add to "backpack"
+- fixed position component?
+- where to show it?
+
+More advanced search options
+- set 
+- colors as checkbox
+
+refactoring
+
+toggle-able advanced search
+- button that initially says SHOW ADVANCED Search
+- click to show adv search
+- then button says HIDE ADV SEARCH or whatever
+- some clickable element doesnt have to be button
