@@ -5,6 +5,9 @@ const CARDS = "/cards/";
 const CARDBACKIMG =
   "https://static.wikia.nocookie.net/mtgsalvation_gamepedia/images/f/f8/Magic_card_back.jpg/revision/latest?cb=20140813141013";
 const root = document.querySelector(".autocomplete");
+const advancedSearch = document.querySelector('#advanced-search')
+const searchButton = document.querySelector('#search-button')
+const formData = {}
 const onCardSelect = async (card, summaryElement) => {
   const response = await axios.get(BASEURL + CARDS + card.id);
   summaryElement.innerHTML = cardTemplate(response.data);
@@ -111,5 +114,53 @@ const autoCompleteConfig = {
     });
   },
 };
+const queryAssemble = formData => {
+  let searchTerm = ''
 
+  for (const key in formData) {
+    switch (key) {
+      case 'Name': {
+        searchTerm += ` ${formData[key]}`
+        console.log(key)
+        break
+      }
+      case 'Type': {
+        searchTerm += ` t:${formData[key]}`
+        console.log(key)
+        break
+      }
+      case 'Color': {
+        searchTerm += ` ${formData[key]}`
+        console.log(key)
+        break
+      }
+      case 'Text': {
+        searchTerm += ` o:${formData[key]}`
+        console.log(key)
+        break
+      }
+    }
+  }
+
+  return searchTerm
+}
+searchButton.addEventListener('click', async (e) => {
+
+  console.log(formData)
+  
+  let searchTerm = queryAssemble(formData)
+
+  const response = await axios.get(BASEURL + SEARCHEND, {
+    params: {
+      q: searchTerm
+    }
+  })
+
+  console.log(response)
+  autoCompleteConfig.onEnter(response.data.data, autoCompleteConfig.onOptionSelect)
+})
 createAutoComplete(autoCompleteConfig);
+createInput(advancedSearch, formData, "Name")
+createInput(advancedSearch, formData, "Type")
+createInput(advancedSearch, formData, "Text")
+createInput(advancedSearch, formData, "Color")
