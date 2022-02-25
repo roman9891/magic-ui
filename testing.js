@@ -1,7 +1,7 @@
 // write functions here for dev console testing
 // this file is loaded last in the html
 
-const fetchData = async (searchTerm) => {
+const fetchDataTest = async (searchTerm) => {
   const response = await axios.get(BASEURL + SEARCHEND, {
     params: {
       q: searchTerm,
