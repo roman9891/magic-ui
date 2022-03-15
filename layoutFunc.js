@@ -1,6 +1,7 @@
-
-const layout (card) => {
-  let poster = ''
- return poster
-}
-// card.image_uris.small 
+const layout = (card) => {
+  imageURI = ["normal"];
+  let poster = "";
+  if (card.layout == !imageURI) poster = card.image_uris.small;
+  return poster;
+};
+//
