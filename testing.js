@@ -6,64 +6,64 @@ const fetchDataTest = async (searchTerm) => {
     params: {
       q: searchTerm,
     },
-  });
-  console.log(response.data);
-  const firstCard = response.data.data[0];
-  console.log(firstCard);
-  const tester = document.querySelector("#testdiv");
-  const card = document.createElement("div");
-  const imageSource = firstCard.image_uris.small;
+  })
+  console.log(response.data)
+  const firstCard = response.data.data[0]
+  console.log(firstCard)
+  const tester = document.querySelector('#testdiv')
+  const card = document.createElement('div')
+  const imageSource = firstCard.image_uris.small
   //card.innerHTML = ` <img src="${imageSource}"/>`;
-  tester.appendChild(card);
-  const images = Object.keys(firstCard.image_uris);
+  tester.appendChild(card)
+  const images = Object.keys(firstCard.image_uris)
   images.forEach((prop) => {
-    const img = document.createElement("img");
-    const p = document.createElement("p");
-    p.innerText = prop;
-    img.src = firstCard.image_uris[prop];
-    card.appendChild(img);
-    card.appendChild(p);
-  });
-};
+    const img = document.createElement('img')
+    const p = document.createElement('p')
+    p.innerText = prop
+    img.src = firstCard.image_uris[prop]
+    card.appendChild(img)
+    card.appendChild(p)
+  })
+}
 
 // can keep for reference but these will probably be unusued
 const runComparison = (cardLeft, cardRight) => {
   const leftSideStats = document.querySelectorAll(
-    "#left-summary .notification "
-  );
+    '#left-summary .notification '
+  )
   const rightSideStats = document.querySelectorAll(
-    "#right-summary .notification "
-  );
+    '#right-summary .notification '
+  )
 
   leftSideStats.forEach((leftStat, index) => {
-    const rightStat = rightSideStats[index];
+    const rightStat = rightSideStats[index]
 
-    const leftStatValue = parseInt(leftStat.dataset.value);
-    const rightStatValue = parseInt(rightStat.dataset.value);
+    const leftStatValue = parseInt(leftStat.dataset.value)
+    const rightStatValue = parseInt(rightStat.dataset.value)
 
     if (leftStatValue > rightStatValue) {
-      rightStat.classList.remove("is-primary");
-      rightStat.classList.add("is-warning");
+      rightStat.classList.remove('is-primary')
+      rightStat.classList.add('is-warning')
     } else if (leftStatValue < rightStatValue) {
-      leftStat.classList.remove("is-primary");
-      leftStat.classList.add("is-warning");
+      leftStat.classList.remove('is-primary')
+      leftStat.classList.add('is-warning')
     }
-    console.log(leftStatValue, rightStatValue);
-  });
-};
+    console.log(leftStatValue, rightStatValue)
+  })
+}
 
 const movieTemplate = (movieDetail) => {
   const dollars = parseInt(
-    movieDetail.BoxOffice.replace(/\$/g, "").replace(/,/g, "")
-  );
-  const metascore = parseInt(movieDetail.Metascore);
-  const imdbRating = parseFloat(movieDetail.imdbRating);
-  const imdbVotes = parseInt(movieDetail.imdbVotes.replace(/,/g, ""));
-  const awards = movieDetail.Awards.split(" ").reduce((prev, word) => {
-    value = parseInt(word);
-    if (!isNaN(value)) return prev + value;
-    else return prev;
-  }, 0);
+    movieDetail.BoxOffice.replace(/\$/g, '').replace(/,/g, '')
+  )
+  const metascore = parseInt(movieDetail.Metascore)
+  const imdbRating = parseFloat(movieDetail.imdbRating)
+  const imdbVotes = parseInt(movieDetail.imdbVotes.replace(/,/g, ''))
+  const awards = movieDetail.Awards.split(' ').reduce((prev, word) => {
+    value = parseInt(word)
+    if (!isNaN(value)) return prev + value
+    else return prev
+  }, 0)
 
   return `
       <article class="media">
@@ -100,5 +100,5 @@ const movieTemplate = (movieDetail) => {
           <p class="title">${movieDetail.imdbVotes}</p>
           <p class="subtitle">IMDB Votes</p>
       </article>
-  `;
-};
+  `
+}

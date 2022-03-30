@@ -1,2 +1,2 @@
-createAutoComplete(autoCompleteConfig);
+createAutoComplete(autoCompleteConfig)
 createForm(advancedSearchFormConfig)

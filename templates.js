@@ -1,5 +1,5 @@
 const selectedCardTemplate = (card) => {
-    return `
+  return `
       <div class="box">
         <article class="media">
           <div class="media-left">
@@ -43,5 +43,5 @@ const selectedCardTemplate = (card) => {
           </div>
         </article>
       </div>
-    `;
-};
+    `
+}
